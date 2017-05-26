@@ -9,6 +9,18 @@
 import UIKit
 
 class CurrentLocationViewController: UIViewController {
+    
+    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var latitudeLabel: UILabel!
+    @IBOutlet weak var longitudeLabel: UILabel!
+    
+    @IBAction func tagLocationButtonPressed() {
+    
+    }
+    
+    @IBAction func getLocationButtonPressed() {
+    
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
