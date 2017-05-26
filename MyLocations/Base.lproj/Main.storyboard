@@ -84,6 +84,15 @@
                                     <action selector="getLocationButtonPressed" destination="9pv-A4-QxB" eventType="touchUpInside" id="tTa-8V-Ke9"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Address goes here)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cR-VH-Z9L">
+                                <rect key="frame" x="16" y="140" width="288" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="mFK-ta-ezc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -94,6 +103,7 @@
                             <constraint firstItem="nVO-7x-e0G" firstAttribute="height" secondItem="azA-M2-h1P" secondAttribute="height" id="BLM-oO-CVf"/>
                             <constraint firstItem="nVO-7x-e0G" firstAttribute="leading" secondItem="azA-M2-h1P" secondAttribute="trailing" id="Fdq-ub-OtL"/>
                             <constraint firstItem="EWk-Sy-s5h" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="IGL-W5-giz"/>
+                            <constraint firstItem="7cR-VH-Z9L" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="KkK-Pm-RJz"/>
                             <constraint firstItem="EWk-Sy-s5h" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" multiplier="0.3" id="PXx-4k-8v0"/>
                             <constraint firstItem="azA-M2-h1P" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" multiplier="0.3" id="Sc6-Ga-97o"/>
                             <constraint firstItem="DFP-L9-Q7L" firstAttribute="baseline" secondItem="EWk-Sy-s5h" secondAttribute="baseline" id="YVe-O3-0Yc"/>
@@ -107,13 +117,16 @@
                             <constraint firstItem="azA-M2-h1P" firstAttribute="top" secondItem="yhQ-f5-Oec" secondAttribute="bottom" id="heI-i7-RoG"/>
                             <constraint firstItem="nVO-7x-e0G" firstAttribute="baseline" secondItem="azA-M2-h1P" secondAttribute="baseline" id="hvh-FJ-peZ"/>
                             <constraint firstItem="yhQ-f5-Oec" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="jeC-tk-RoP"/>
+                            <constraint firstItem="7cR-VH-Z9L" firstAttribute="top" secondItem="DFP-L9-Q7L" secondAttribute="bottom" constant="30" id="kj1-wo-phh"/>
                             <constraint firstItem="DFP-L9-Q7L" firstAttribute="leading" secondItem="EWk-Sy-s5h" secondAttribute="trailing" id="mer-1m-VAT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7cR-VH-Z9L" secondAttribute="trailing" id="oQS-gH-OOI"/>
                             <constraint firstItem="NhZ-sH-H5x" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="vm8-Er-5QH"/>
                             <constraint firstItem="EWk-Sy-s5h" firstAttribute="top" secondItem="azA-M2-h1P" secondAttribute="bottom" id="yT1-sU-V80"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Tag" image="first" id="acW-dT-cKf"/>
                     <connections>
+                        <outlet property="addressLabel" destination="7cR-VH-Z9L" id="OAs-Vh-W5z"/>
                         <outlet property="latitudeLabel" destination="nVO-7x-e0G" id="k6t-Tm-RRl"/>
                         <outlet property="longitudeLabel" destination="DFP-L9-Q7L" id="YZO-iT-yZy"/>
                         <outlet property="messageLabel" destination="yhQ-f5-Oec" id="U1c-2I-dgO"/>
@@ -121,7 +134,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
+            <point key="canvasLocation" x="750" y="-320.07042253521126"/>
         </scene>
         <!--Second-->
         <scene sceneID="wg7-f3-ORb">
