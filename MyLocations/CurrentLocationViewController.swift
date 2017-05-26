@@ -15,19 +15,23 @@ class CurrentLocationViewController: UIViewController {
     @IBOutlet weak var latitudeLabel: UILabel!
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var tagLocationButton: UIButton!
     
     let locationManager = CLLocationManager()
+    var location: CLLocation?
     
     @IBAction func tagLocationButtonPressed() {
     
     }
     
     @IBAction func getLocationButtonPressed() {
+        
         prepareCoreLocationOperation()
         
         if locationManager.delegate == nil {
             return
         }
+        
         locationManager.requestLocation()
     }
     
@@ -50,10 +54,24 @@ class CurrentLocationViewController: UIViewController {
         
         locationManager.delegate = self
     }
+    
+    func updateLabels() {
+        if let location = self.location {
+            latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
+            longitudeLabel.text = String(format: "%.8f", location.coordinate.longitude)
+            messageLabel.text = ""
+            tagLocationButton.isHidden = false
+        } else {
+            latitudeLabel.text = "Unknown"
+            longitudeLabel.text = "Unknown"
+            messageLabel.text = "Tap Get My Location to begin"
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        updateLabels()
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,11 +88,8 @@ extension CurrentLocationViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        messageLabel.text = "Location Updated"
-        
-        let location = locations.last!
-        latitudeLabel.text = "\(location.coordinate.latitude)"
-        longitudeLabel.text = "\(location.coordinate.longitude)"
+        self.location = locations.last!
+        updateLabels()
     }
 }
 
