@@ -19,8 +19,6 @@ class CurrentLocationViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     var location: CLLocation?
-    
-    var shouldRequestLocation = false
     var updatingLocation = false
     
     @IBAction func tagLocationButtonPressed() {
@@ -28,36 +26,57 @@ class CurrentLocationViewController: UIViewController {
     }
     
     @IBAction func getLocationButtonPressed() {
+        locationManager.delegate = self
         
-        prepareCoreLocationOperation()
-        
-        if !shouldRequestLocation {
+        getLocation()
+    }
+    
+    func getLocation() {
+        guard canRequestLocation() else {
             return
         }
         
-        locationManager.requestLocation()
-        self.updatingLocation = true
+        startLocationManager()
         updateLabels()
     }
     
-    private func prepareCoreLocationOperation() {
+    func startLocationManager() {
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.startUpdatingLocation()
+        self.updatingLocation = true
+    }
+    
+    func stopLocationManager() {
+        locationManager.stopUpdatingLocation()
+        self.updatingLocation = false
+    }
+    
+    private func canRequestLocation() -> Bool {
         switch CLLocationManager.authorizationStatus() {
         case .restricted, .denied:
-
-            let alertController = UIAlertController(title: "App is not allowed to use Location Services", message: "Please turn on Location Services usage in Settings for this App", preferredStyle: .alert)
-            let OKAction = UIAlertAction(title: "Got it", style: .default, handler: nil)
-            alertController.addAction(OKAction)
-            present(alertController, animated: true, completion: nil)
+            showServiceDeniedController()
+            return false
             
-            return
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
-            CLLocationManager.locationServicesEnabled()
-        default:
-            break;
+            return false
+            
+        case .authorizedAlways, .authorizedWhenInUse:
+            return true
         }
+    }
+    
+    private func showServiceDeniedController() {
+        let alertController = UIAlertController(
+            title: "App is not allowed to use Location Services",
+            message: "Please turn on Location Services usage in Settings for this App",
+            preferredStyle: .alert
+        )
         
-        shouldRequestLocation = true
+        alertController.addAction(
+            UIAlertAction(title: "Got it", style: .default, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     func updateLabels(withErrorCode errorCode:CLError.Code? = nil) {
@@ -90,11 +109,6 @@ class CurrentLocationViewController: UIViewController {
             "Scanning..." :
             ""
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        locationManager.delegate = self
-    }
 }
 
 extension CurrentLocationViewController: CLLocationManagerDelegate {
@@ -107,16 +121,19 @@ extension CurrentLocationViewController: CLLocationManagerDelegate {
             return
         }
         
+        stopLocationManager()
+        //TODO: Refactor
         updateLabels(withErrorCode: CLError.Code(rawValue: code))
-        self.updatingLocation = false
-        self.shouldRequestLocation = false
-        manager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.location = locations.last!
         self.updatingLocation = false
         updateLabels()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        getLocation()
     }
 }
 
