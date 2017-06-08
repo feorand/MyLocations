@@ -10,9 +10,6 @@ import UIKit
 import CoreLocation
 
 class CurrentLocationViewController: UIViewController {
-    enum AppState {
-        case idle, updateStarted, updateFinished
-    }
     
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var latitudeLabel: UILabel!
@@ -22,8 +19,9 @@ class CurrentLocationViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     var location: CLLocation?
-    var state: AppState = .idle
+    
     var shouldRequestLocation = false
+    var updatingLocation = false
     
     @IBAction func tagLocationButtonPressed() {
     
@@ -38,7 +36,7 @@ class CurrentLocationViewController: UIViewController {
         }
         
         locationManager.requestLocation()
-        state = .updateStarted
+        self.updatingLocation = true
         updateLabels()
     }
     
@@ -63,23 +61,12 @@ class CurrentLocationViewController: UIViewController {
     }
     
     func updateLabels(withErrorCode errorCode:CLError.Code? = nil) {
-        switch self.state {
-        case .updateStarted:
+        if self.updatingLocation {
             latitudeLabel.text = "Updating"
             longitudeLabel.text = "Updating"
-            tagLocationButton.isHidden = false
-        case .updateFinished:
+        } else {
             latitudeLabel.text = String(format: "%.8f", location?.coordinate.latitude ?? "Unknown")
             longitudeLabel.text = String(format: "%.8f", location?.coordinate.longitude ?? "Unknown")
-            tagLocationButton.isHidden = false
-        case .idle:
-            return
-        }
-        
-        if let errorCode = errorCode {
-//            switch errorCode {
-//            case CLError
-//            }
         }
     }
     
@@ -100,14 +87,14 @@ extension CurrentLocationViewController: CLLocationManagerDelegate {
         }
         
         updateLabels(withErrorCode: CLError.Code(rawValue: code))
-        state = .updateFinished
-        shouldRequestLocation = false
+        self.updatingLocation = false
+        self.shouldRequestLocation = false
         manager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.location = locations.last!
-        state = .updateFinished
+        self.updatingLocation = false
         updateLabels()
     }
 }
