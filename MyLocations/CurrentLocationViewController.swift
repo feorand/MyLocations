@@ -10,6 +10,9 @@ import UIKit
 import CoreLocation
 
 class CurrentLocationViewController: UIViewController {
+    enum AppState {
+        case idle, updateStarted, updateFinished
+    }
     
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var latitudeLabel: UILabel!
@@ -19,6 +22,8 @@ class CurrentLocationViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     var location: CLLocation?
+    var state: AppState = .idle
+    var shouldRequestLocation = false
     
     @IBAction func tagLocationButtonPressed() {
     
@@ -28,11 +33,13 @@ class CurrentLocationViewController: UIViewController {
         
         prepareCoreLocationOperation()
         
-        if locationManager.delegate == nil {
+        if !shouldRequestLocation {
             return
         }
         
         locationManager.requestLocation()
+        state = .updateStarted
+        updateLabels()
     }
     
     private func prepareCoreLocationOperation() {
@@ -52,43 +59,55 @@ class CurrentLocationViewController: UIViewController {
             break;
         }
         
-        locationManager.delegate = self
+        shouldRequestLocation = true
     }
     
-    func updateLabels() {
-        if let location = self.location {
-            latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
-            longitudeLabel.text = String(format: "%.8f", location.coordinate.longitude)
-            messageLabel.text = ""
+    func updateLabels(withErrorCode errorCode:CLError.Code? = nil) {
+        switch self.state {
+        case .updateStarted:
+            latitudeLabel.text = "Updating"
+            longitudeLabel.text = "Updating"
             tagLocationButton.isHidden = false
-        } else {
-            latitudeLabel.text = "Unknown"
-            longitudeLabel.text = "Unknown"
-            messageLabel.text = "Tap Get My Location to begin"
+        case .updateFinished:
+            latitudeLabel.text = String(format: "%.8f", location?.coordinate.latitude ?? "Unknown")
+            longitudeLabel.text = String(format: "%.8f", location?.coordinate.longitude ?? "Unknown")
+            tagLocationButton.isHidden = false
+        case .idle:
+            return
+        }
+        
+        if let errorCode = errorCode {
+//            switch errorCode {
+//            case CLError
+//            }
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        updateLabels()
+        locationManager.delegate = self
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }
 
 extension CurrentLocationViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Location manager did fall with error: \(error)")
+        print("Location manager finished with error: \(error)")
+        let code = (error as NSError).code
+        
+        if code == CLError.locationUnknown.rawValue {
+            return
+        }
+        
+        updateLabels(withErrorCode: CLError.Code(rawValue: code))
+        state = .updateFinished
+        shouldRequestLocation = false
+        manager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.location = locations.last!
+        state = .updateFinished
         updateLabels()
     }
 }
