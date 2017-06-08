@@ -68,6 +68,27 @@ class CurrentLocationViewController: UIViewController {
             latitudeLabel.text = String(format: "%.8f", location?.coordinate.latitude ?? "Unknown")
             longitudeLabel.text = String(format: "%.8f", location?.coordinate.longitude ?? "Unknown")
         }
+        
+        tagLocationButton.isHidden = (location == nil)
+        
+        guard CLLocationManager.locationServicesEnabled() else {
+            messageLabel.text = "Location Services disabled on device"
+            return
+        }
+        
+        if let errorCode = errorCode {
+            switch errorCode {
+            case CLError.denied:
+                messageLabel.text = "Location Services disabled for this app"
+            default:
+                messageLabel.text = "Error getting location"
+            }
+            return
+        }
+        
+        messageLabel.text = self.updatingLocation ?
+            "Scanning..." :
+            ""
     }
     
     override func viewDidLoad() {
