@@ -18,6 +18,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet private weak var longitudeLabel: UILabel!
     @IBOutlet private weak var addressLabel: UILabel!
     @IBOutlet private weak var tagLocationButton: UIButton!
+    @IBOutlet private weak var getLocationButton: UIButton!
     
     //MARK: - State variables
     
@@ -39,7 +40,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
         
         stopLocationManager()
-        updateLabels(withErrorCode: locationError)
+        updateUI(withErrorCode: locationError)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -63,7 +64,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
                 stopLocationManager()
             }
             
-            updateLabels()
+            updateUI()
         }
     }
     
@@ -93,7 +94,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         
         self.location = nil
         startLocationManager()
-        updateLabels()
+        updateUI()
     }
     
     private func startLocationManager() {
@@ -137,7 +138,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         present(alertController, animated: true, completion: nil)
     }
     
-    private func updateLabels(withErrorCode errorCode:CLError.Code? = nil) {
+    private func updateUI(withErrorCode errorCode:CLError.Code? = nil) {
         
         if let location = self.location {
             latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
@@ -148,6 +149,10 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
         
         tagLocationButton.isHidden = (location == nil)
+        
+        getLocationButton.setTitle(
+            self.updatingLocation ? "Stop updating" : "Get my location",
+            for: .normal)
         
         guard CLLocationManager.locationServicesEnabled() else {
             messageLabel.text = "Location Services disabled on device"
