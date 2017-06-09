@@ -115,15 +115,14 @@ extension CurrentLocationViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Location manager finished with error: \(error)")
-        let code = (error as NSError).code
+        let locationError = CLError.Code(rawValue: (error as NSError).code)
         
-        if code == CLError.locationUnknown.rawValue {
+        if locationError == CLError.locationUnknown {
             return
         }
         
         stopLocationManager()
-        //TODO: Refactor
-        updateLabels(withErrorCode: CLError.Code(rawValue: code))
+        updateLabels(withErrorCode: locationError)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
