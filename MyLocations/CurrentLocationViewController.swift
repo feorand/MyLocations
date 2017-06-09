@@ -62,11 +62,13 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     //MARK: - Support private methods
+    
     private func getLocation() {
         guard canRequestLocation() else {
             return
         }
         
+        location = nil
         startLocationManager()
         updateLabels()
     }
