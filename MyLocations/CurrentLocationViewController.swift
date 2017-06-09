@@ -28,10 +28,13 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     //MARK: - Methods of CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
         print("Location manager finished with error: \(error)")
+        
         let locationError = CLError.Code(rawValue: (error as NSError).code)
         
         if locationError == CLError.locationUnknown {
+            print("Location unknown")
             return
         }
         
@@ -41,32 +44,34 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        let lastLocation = locations.last!
+        let newLocation = locations.last!
         
-        guard lastLocation.timestamp.timeIntervalSinceNow < 5.0 else {
+        guard newLocation.timestamp.timeIntervalSinceNow > -5 else {
             return
         }
         
-        guard lastLocation.horizontalAccuracy > 0 else {
+        guard newLocation.horizontalAccuracy > 0 else {
             return
         }
         
-        if let previousLocation = self.location,
-            previousLocation.horizontalAccuracy < lastLocation.horizontalAccuracy {
-            return
+        if self.location == nil ||
+            self.location!.horizontalAccuracy > newLocation.horizontalAccuracy {
+        
+            self.location = newLocation
+
+            if newLocation.horizontalAccuracy <= manager.desiredAccuracy {
+                stopLocationManager()
+            }
+            
+            updateLabels()
         }
-        
-        //TODO: Guard against too little accuracy improvement
-        
-        self.location = lastLocation
-        self.updatingLocation = false
-        updateLabels()
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
         getLocation()
     }
-
+ 
     //MARK: - Actions
     
     @IBAction private func tagLocationButtonPressed() {
@@ -74,30 +79,32 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     @IBAction private func getLocationButtonPressed() {
-        locationManager.delegate = self
-        
+ 
         getLocation()
     }
     
     //MARK: - Support private methods
     
     private func getLocation() {
+        
         guard canRequestLocation() else {
             return
         }
         
-        location = nil
+        self.location = nil
         startLocationManager()
         updateLabels()
     }
     
     private func startLocationManager() {
+        locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
         self.updatingLocation = true
     }
     
     private func stopLocationManager() {
+        locationManager.delegate = nil
         locationManager.stopUpdatingLocation()
         self.updatingLocation = false
     }
@@ -131,12 +138,13 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     private func updateLabels(withErrorCode errorCode:CLError.Code? = nil) {
-        if self.updatingLocation {
+        
+        if let location = self.location {
+            latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
+            longitudeLabel.text = String(format: "%.8f", location.coordinate.longitude)
+        } else if self.updatingLocation {
             latitudeLabel.text = "Updating"
             longitudeLabel.text = "Updating"
-        } else {
-            latitudeLabel.text = String(format: "%.8f", location?.coordinate.latitude ?? "Unknown")
-            longitudeLabel.text = String(format: "%.8f", location?.coordinate.longitude ?? "Unknown")
         }
         
         tagLocationButton.isHidden = (location == nil)
