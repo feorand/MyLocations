@@ -80,8 +80,13 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     @IBAction private func getLocationButtonPressed() {
- 
-        getLocation()
+        if self.updatingLocation {
+            stopLocationManager()
+            updateUI()
+        } else {
+            getLocation()
+        }
+
     }
     
     //MARK: - Support private methods
@@ -146,6 +151,9 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         } else if self.updatingLocation {
             latitudeLabel.text = "Updating"
             longitudeLabel.text = "Updating"
+        } else {
+            latitudeLabel.text = ""
+            longitudeLabel.text = ""
         }
         
         tagLocationButton.isHidden = (location == nil)
