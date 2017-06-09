@@ -40,7 +40,25 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.location = locations.last!
+        
+        let lastLocation = locations.last!
+        
+        guard lastLocation.timestamp.timeIntervalSinceNow < 5.0 else {
+            return
+        }
+        
+        guard lastLocation.horizontalAccuracy > 0 else {
+            return
+        }
+        
+        if let previousLocation = self.location,
+            previousLocation.horizontalAccuracy < lastLocation.horizontalAccuracy {
+            return
+        }
+        
+        //TODO: Guard against too little accuracy improvement
+        
+        self.location = lastLocation
         self.updatingLocation = false
         updateLabels()
     }
@@ -142,6 +160,5 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             "Scanning..." :
             ""
     }
-    
 }
 
