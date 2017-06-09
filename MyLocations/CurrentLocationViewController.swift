@@ -35,7 +35,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         let locationError = CLError.Code(rawValue: (error as NSError).code)
         
         if locationError == CLError.locationUnknown {
-            print("Location unknown")
             return
         }
         
@@ -80,13 +79,13 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     @IBAction private func getLocationButtonPressed() {
+        
         if self.updatingLocation {
             stopLocationManager()
             updateUI()
         } else {
             getLocation()
         }
-
     }
     
     //MARK: - Support private methods
@@ -103,6 +102,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     private func startLocationManager() {
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
@@ -110,12 +110,14 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     private func stopLocationManager() {
+        
         locationManager.delegate = nil
         locationManager.stopUpdatingLocation()
         self.updatingLocation = false
     }
     
     private func canRequestLocation() -> Bool {
+        
         switch CLLocationManager.authorizationStatus() {
         case .restricted, .denied:
             showServiceDeniedController()
@@ -131,6 +133,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     private func showServiceDeniedController() {
+        
         let alertController = UIAlertController(
             title: "App is not allowed to use Location Services",
             message: "Please turn on Location Services usage in Settings for this App",
@@ -145,28 +148,11 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     private func updateUI(withErrorCode errorCode:CLError.Code? = nil) {
         
-        if let location = self.location {
-            latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
-            longitudeLabel.text = String(format: "%.8f", location.coordinate.longitude)
-        } else if self.updatingLocation {
-            latitudeLabel.text = "Updating"
-            longitudeLabel.text = "Updating"
-        } else {
-            latitudeLabel.text = ""
-            longitudeLabel.text = ""
-        }
-        
-        tagLocationButton.isHidden = (location == nil)
-        
-        getLocationButton.setTitle(
-            self.updatingLocation ? "Stop updating" : "Get my location",
-            for: .normal)
-        
         guard CLLocationManager.locationServicesEnabled() else {
             messageLabel.text = "Location Services disabled on device"
             return
         }
-        
+
         if let errorCode = errorCode {
             switch errorCode {
             case CLError.denied:
@@ -176,10 +162,24 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             }
             return
         }
-        
-        messageLabel.text = self.updatingLocation ?
-            "Scanning..." :
-            ""
+
+        if let location = location {
+            latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
+            longitudeLabel.text = String(format: "%.8f", location.coordinate.longitude)
+            tagLocationButton.isHidden = false
+        } else {
+            latitudeLabel.text = ""
+            longitudeLabel.text = ""
+            tagLocationButton.isHidden = true
+        }
+
+        if updatingLocation {
+            messageLabel.text = "Scanning..."
+            getLocationButton.setTitle("Stop Updating", for: .normal)
+        } else {
+            messageLabel.text = ""
+            getLocationButton.setTitle("Get My Location", for: .normal)
+        }
     }
 }
 
