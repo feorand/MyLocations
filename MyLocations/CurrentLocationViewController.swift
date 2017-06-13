@@ -50,9 +50,9 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
     }
     
-    private var updatingPlacemark = false {
+    private var updatingAddress = false {
         didSet {
-            if updatingPlacemark {
+            if updatingAddress {
                 addressLabel.text = "Updating address..."
             }
         }
@@ -71,7 +71,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
         
         stopLocationManager()
-        updateUI(withErrorCode: locationError)
+        showError(withErrorCode: locationError)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -99,10 +99,10 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
         
         let geocoder = CLGeocoder()
-        updatingPlacemark = true
+        updatingAddress = true
         geocoder.reverseGeocodeLocation(newLocation, completionHandler: {providedPlacemarks, error in
             
-            self.updatingPlacemark = false
+            self.updatingAddress = false
             
             guard error == nil else {
                 print("Reverse geocoding: error \(error.debugDescription)")
@@ -120,10 +120,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             }
             
             self.address = self.getAddress(from: placemark)
-            self.updateUI()
         })
-        
-        updateUI()
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -141,7 +138,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         
         if self.updatingLocation {
             stopLocationManager()
-            updateUI()
         } else {
             getLocation()
         }
@@ -158,7 +154,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         self.location = nil
         self.address = nil
         startLocationManager()
-        updateUI()
     }
     
     private func getAddress(from placemark: CLPlacemark) -> String {
@@ -218,7 +213,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         present(alertController, animated: true, completion: nil)
     }
     
-    private func updateUI(withErrorCode errorCode:CLError.Code? = nil) {
+    private func showError(withErrorCode errorCode:CLError.Code? = nil) {
         
         guard CLLocationManager.locationServicesEnabled() else {
             messageLabel.text = "Location Services disabled on device"
