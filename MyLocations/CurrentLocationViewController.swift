@@ -23,10 +23,40 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     //MARK: - State variables
     
     private let locationManager = CLLocationManager()
-    private var location: CLLocation?
-    private var address: String?
-    private var updatingLocation = false
-    private var updatingPlacemark = false
+    
+    private var location: CLLocation? {
+        didSet {
+            latitudeLabel.text = String(format: "%.8f", location?.coordinate.latitude ?? "")
+            longitudeLabel.text = String(format: "%.8f", location?.coordinate.longitude ?? "")
+            tagLocationButton.isHidden = (location == nil)
+        }
+    }
+    
+    private var address: String? {
+        didSet {
+            addressLabel.text = address
+        }
+    }
+    
+    private var updatingLocation = false {
+        didSet {
+            if updatingLocation {
+                messageLabel.text = "Scanning..."
+                getLocationButton.setTitle("Stop Updating", for: .normal)
+            } else {
+                messageLabel.text = ""
+                getLocationButton.setTitle("Get My Location", for: .normal)
+            }
+        }
+    }
+    
+    private var updatingPlacemark = false {
+        didSet {
+            if updatingPlacemark {
+                addressLabel.text = "Updating address..."
+            }
+        }
+    }
     
     //MARK: - Methods of CLLocationManagerDelegate
     
@@ -204,26 +234,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             }
             return
         }
-
-        if let location = location {
-            latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
-            longitudeLabel.text = String(format: "%.8f", location.coordinate.longitude)
-            tagLocationButton.isHidden = false
-        } else {
-            latitudeLabel.text = ""
-            longitudeLabel.text = ""
-            tagLocationButton.isHidden = true
-        }
-
-        if updatingLocation {
-            messageLabel.text = "Scanning..."
-            getLocationButton.setTitle("Stop Updating", for: .normal)
-        } else {
-            messageLabel.text = ""
-            getLocationButton.setTitle("Get My Location", for: .normal)
-        }
-        
-        addressLabel.text = updatingPlacemark ? "Updating address" : address
     }
 }
 
