@@ -132,7 +132,15 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     private func getAddress(from placemark: CLPlacemark) -> String {
-        return "dummy address"
+        
+        let countryPart = placemark.country ?? ""
+        let cityPart = placemark.locality ?? ""
+        let address1Part = placemark.thoroughfare ?? ""
+        let address2Part = placemark.subThoroughfare ?? ""
+        
+        let address = "\(countryPart), \(cityPart)\n\(address1Part), \(address2Part)"
+        
+        return address
     }
     
     private func startLocationManager() {
