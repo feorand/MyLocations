@@ -24,8 +24,9 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     private let locationManager = CLLocationManager()
     private var location: CLLocation?
-    private var placemark: CLPlacemark?
+    private var address: String?
     private var updatingLocation = false
+    private var updatingPlacemark = false
     
     //MARK: - Methods of CLLocationManagerDelegate
     
@@ -67,6 +68,31 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             stopLocationManager()
         }
         
+        let geocoder = CLGeocoder()
+        updatingPlacemark = true
+        geocoder.reverseGeocodeLocation(newLocation, completionHandler: {providedPlacemarks, error in
+            
+            self.updatingPlacemark = false
+            
+            guard error == nil else {
+                print("Reverse geocoding: error \(error.debugDescription)")
+                return
+            }
+            
+            guard let placemarks = providedPlacemarks else {
+                print("Reverse geocoding: no placemarks")
+                return
+            }
+            
+            guard let placemark = placemarks.first else {
+                print("Reverse geocoding: placemarks list is empty")
+                return
+            }
+            
+            self.address = self.getAddress(from: placemark)
+            self.updateUI()
+        })
+        
         updateUI()
     }
     
@@ -100,8 +126,13 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
         
         self.location = nil
+        self.address = nil
         startLocationManager()
         updateUI()
+    }
+    
+    private func getAddress(from placemark: CLPlacemark) -> String {
+        return "dummy address"
     }
     
     private func startLocationManager() {
@@ -183,6 +214,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             messageLabel.text = ""
             getLocationButton.setTitle("Get My Location", for: .normal)
         }
+        
+        addressLabel.text = updatingPlacemark ? "Updating address" : address
     }
 }
 
