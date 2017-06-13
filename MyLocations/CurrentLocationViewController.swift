@@ -24,6 +24,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     private let locationManager = CLLocationManager()
     private var location: CLLocation?
+    private var placemark: CLPlacemark?
     private var updatingLocation = false
     
     //MARK: - Methods of CLLocationManagerDelegate
@@ -54,17 +55,19 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             return
         }
         
-        if self.location == nil ||
-            self.location!.horizontalAccuracy > newLocation.horizontalAccuracy {
-        
-            self.location = newLocation
-
-            if newLocation.horizontalAccuracy <= manager.desiredAccuracy {
-                stopLocationManager()
-            }
+        guard self.location == nil ||
+            self.location!.horizontalAccuracy > newLocation.horizontalAccuracy else {
             
-            updateUI()
+            return
         }
+        
+        self.location = newLocation
+
+        if newLocation.horizontalAccuracy <= manager.desiredAccuracy {
+            stopLocationManager()
+        }
+        
+        updateUI()
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
