@@ -118,26 +118,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         
         let geocoder = CLGeocoder()
         updatingAddress = true
-        geocoder.reverseGeocodeLocation(newLocation, completionHandler: {providedPlacemarks, error in
-            
-            self.updatingAddress = false
-            
-            guard error == nil else {
-                print("Reverse geocoding: error \(error.debugDescription)")
-                return
-            }
-            
-            guard let placemarks = providedPlacemarks else {
-                print("Reverse geocoding: no placemarks")
-                return
-            }
-            
-            guard let placemark = placemarks.first else {
-                print("Reverse geocoding: placemarks list is empty")
-                return
-            }
-            
-            self.address = self.getAddress(from: placemark)
+        geocoder.reverseGeocodeLocation(newLocation, completionHandler: {placemarks, error in
+            self.reverseGeocodingCompleted(providedPlacemarks: placemarks, error: error)
         })
     }
     
@@ -247,6 +229,28 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             }
             return
         }
+    }
+    
+    private func reverseGeocodingCompleted(providedPlacemarks: [CLPlacemark]?,
+                                           error: Error?) {
+        updatingAddress = false
+        
+        guard error == nil else {
+            print("Reverse geocoding: error \(error.debugDescription)")
+            return
+        }
+        
+        guard let placemarks = providedPlacemarks else {
+            print("Reverse geocoding: no placemarks")
+            return
+        }
+        
+        guard let placemark = placemarks.first else {
+            print("Reverse geocoding: placemarks list is empty")
+            return
+        }
+        
+        address = getAddress(from: placemark)
     }
 }
 
