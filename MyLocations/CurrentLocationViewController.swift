@@ -114,16 +114,12 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
         
         self.location = newLocation
+        
+        reverseGeocode(location: newLocation)
 
         if newLocation.horizontalAccuracy <= manager.desiredAccuracy {
             stopLocationManager()
         }
-        
-        let geocoder = CLGeocoder()
-        updatingAddress = true
-        geocoder.reverseGeocodeLocation(newLocation, completionHandler: {placemarks, error in
-            self.reverseGeocodingCompleted(providedPlacemarks: placemarks, error: error)
-        })
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -232,6 +228,15 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             }
             return
         }
+    }
+    
+    private func reverseGeocode(location: CLLocation) {
+        updatingAddress = true
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location, completionHandler: {placemarks, error in
+            self.reverseGeocodingCompleted(providedPlacemarks: placemarks, error: error)
+        })
     }
     
     private func reverseGeocodingCompleted(providedPlacemarks: [CLPlacemark]?,
