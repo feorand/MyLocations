@@ -26,35 +26,53 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     private var location: CLLocation? {
         didSet {
-            latitudeLabel.text = String(format: "%.8f", location?.coordinate.latitude ?? "")
-            longitudeLabel.text = String(format: "%.8f", location?.coordinate.longitude ?? "")
-            tagLocationButton.isHidden = (location == nil)
+            didSetLocation()
         }
     }
     
     private var address: String? {
         didSet {
-            addressLabel.text = address
+            didSetAddress()
         }
     }
     
     private var updatingLocation = false {
         didSet {
-            if updatingLocation {
-                messageLabel.text = "Scanning..."
-                getLocationButton.setTitle("Stop Updating", for: .normal)
-            } else {
-                messageLabel.text = ""
-                getLocationButton.setTitle("Get My Location", for: .normal)
-            }
+            didSetUpdatingLocation()
         }
     }
     
     private var updatingAddress = false {
         didSet {
-            if updatingAddress {
-                addressLabel.text = "Updating address..."
-            }
+            didSetUpdatingAddress()
+        }
+    }
+    
+    //MARK: - Update interface methods
+    
+    private func didSetLocation() {
+        latitudeLabel.text = String(format: "%.8f", location?.coordinate.latitude ?? "")
+        longitudeLabel.text = String(format: "%.8f", location?.coordinate.longitude ?? "")
+        tagLocationButton.isHidden = (location == nil)
+    }
+    
+    private func didSetAddress() {
+        addressLabel.text = address
+    }
+    
+    private func didSetUpdatingLocation() {
+        if updatingLocation {
+            messageLabel.text = "Scanning..."
+            getLocationButton.setTitle("Stop Updating", for: .normal)
+        } else {
+            messageLabel.text = ""
+            getLocationButton.setTitle("Get My Location", for: .normal)
+        }
+    }
+    
+    private func didSetUpdatingAddress() {
+        if updatingAddress {
+            addressLabel.text = "Updating address..."
         }
     }
     
