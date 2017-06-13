@@ -94,7 +94,10 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        let newLocation = locations.last!
+        guard let newLocation = locations.last else {
+            print("Update location: no locations found")
+            return
+        }
         
         guard newLocation.timestamp.timeIntervalSinceNow > -5 else {
             return
