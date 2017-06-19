@@ -42,7 +42,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
     }
     
-    private var updatingAddress = false {
+    var updatingAddress = false {
         didSet {
             didSetUpdatingAddress()
         }
@@ -235,13 +235,11 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         updatingAddress = true
         
         let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(location, completionHandler: {placemarks, error in
-            self.reverseGeocodingCompleted(providedPlacemarks: placemarks, error: error)
-        })
+        geocoder.reverseGeocodeLocation(location, completionHandler: reverseGeocodingCompleted)
     }
-    
-    private func reverseGeocodingCompleted(providedPlacemarks: [CLPlacemark]?,
-                                           error: Error?) {
+        
+    private func reverseGeocodingCompleted(placemarks: [CLPlacemark]?,
+                                           _ error: Error?) {
         updatingAddress = false
         
         guard error == nil else {
@@ -249,7 +247,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             return
         }
         
-        guard let placemarks = providedPlacemarks else {
+        guard let placemarks = placemarks else {
             print("Reverse geocoding: no placemarks")
             return
         }
