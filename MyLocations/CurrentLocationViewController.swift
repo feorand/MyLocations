@@ -82,14 +82,14 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         
         print("Location manager finished with error: \(error)")
         
-        let locationError = CLError.Code(rawValue: (error as NSError).code)
+        let locationErrorCode = CLError.Code(rawValue: (error as NSError).code)
         
-        if locationError == CLError.locationUnknown {
+        if locationErrorCode == CLError.locationUnknown {
             return
         }
         
         stopLocationManager()
-        showError(withErrorCode: locationError)
+        showPossibleError(withCode: locationErrorCode)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -212,20 +212,21 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         present(alertController, animated: true, completion: nil)
     }
     
-    private func showError(withErrorCode errorCode:CLError.Code? = nil) {
+    private func showPossibleError(withCode code:CLError.Code? = nil) {
         
         guard CLLocationManager.locationServicesEnabled() else {
             messageLabel.text = "Location Services disabled on device"
             return
         }
 
-        if let errorCode = errorCode {
-            switch errorCode {
+        if let code = code {
+            switch code {
             case CLError.denied:
                 messageLabel.text = "Location Services disabled for this app"
             default:
                 messageLabel.text = "Error getting location"
             }
+            
             return
         }
     }
