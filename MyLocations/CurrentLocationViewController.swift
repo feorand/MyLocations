@@ -237,7 +237,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location, completionHandler: reverseGeocodingCompleted)
     }
-        
+    
     private func reverseGeocodingCompleted(placemarks: [CLPlacemark]?,
                                            _ error: Error?) {
         updatingAddress = false
