@@ -18,16 +18,12 @@ class TagLocationViewController: UITableViewController {
     var latitude:String!
     var longitude:String!
     var address: String!
-    var date: String!
+    var date: Date!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        UpdateLabels()
     }
     
     @IBAction func didPressCancel() {
@@ -36,6 +32,17 @@ class TagLocationViewController: UITableViewController {
     
     @IBAction func didPressDone() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    private func UpdateLabels() {
+        self.latitudeLabel.text = self.latitude
+        self.longitudeLabel.text = self.longitude
+        self.addressLabel.text = self.address
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        self.dateLabel.text = dateFormatter.string(from: self.date)
     }
 
     // MARK: - Table view data source

@@ -20,6 +20,42 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet private weak var tagLocationButton: UIButton!
     @IBOutlet private weak var getLocationButton: UIButton!
     
+    //MARK: - Actions
+    
+    @IBAction private func tagLocationButtonPressed() {
+        
+    }
+    
+    @IBAction private func getLocationButtonPressed() {
+        
+        if self.updatingLocation {
+            stopLocationManager()
+        } else {
+            getLocation()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let id = segue.identifier else {
+            print("Unknown segue")
+            return
+        }
+        
+        switch id {
+        case "TagLocation":
+            let navController = segue.destination as! UINavigationController
+            let controller = navController.topViewController! as! TagLocationViewController
+            controller.latitude = self.latitudeLabel.text!
+            controller.longitude = self.longitudeLabel.text!
+            controller.address = self.address!
+            controller.date = Date()
+            segue.perform()
+            return
+        default:
+            return
+        }
+    }
+    
     //MARK: - State variables
     
     private let locationManager = CLLocationManager()
@@ -127,21 +163,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
         getLocation()
-    }
- 
-    //MARK: - Actions
-    
-    @IBAction private func tagLocationButtonPressed() {
-        
-    }
-    
-    @IBAction private func getLocationButtonPressed() {
-        
-        if self.updatingLocation {
-            stopLocationManager()
-        } else {
-            getLocation()
-        }
     }
     
     //MARK: - Support private methods
