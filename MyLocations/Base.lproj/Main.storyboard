@@ -359,10 +359,24 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Tag Location" id="1c5-i3-MFY">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Uuz-8p-pL7"/>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="UhO-TB-3jn"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Uuz-8p-pL7">
+                            <connections>
+                                <action selector="didPressCancel" destination="PvL-Nh-8E0" id="1i3-41-YxK"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="UhO-TB-3jn">
+                            <connections>
+                                <action selector="didPressDone" destination="PvL-Nh-8E0" id="NR3-jq-Y56"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="addressLabel" destination="xaS-g4-BeC" id="oms-jx-zir"/>
+                        <outlet property="dateLabel" destination="qeJ-dU-oRy" id="uk1-JN-Kjm"/>
+                        <outlet property="latitudeLabel" destination="gEa-xJ-P09" id="73y-tB-Xv0"/>
+                        <outlet property="longitudeLabel" destination="FsY-pl-GDL" id="ljy-pV-Fdk"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CZV-9i-7AM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

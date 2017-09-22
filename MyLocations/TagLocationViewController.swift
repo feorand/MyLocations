@@ -10,6 +10,16 @@ import UIKit
 
 class TagLocationViewController: UITableViewController {
 
+    @IBOutlet weak var latitudeLabel: UILabel!
+    @IBOutlet weak var longitudeLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    var latitude:String!
+    var longitude:String!
+    var address: String!
+    var date: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,22 +29,33 @@ class TagLocationViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func didPressCancel() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func didPressDone() {
+        self.dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        switch section {
+        case 0:
+            return 2
+        case 1:
+            return 1
+        case 2:
+            return 4
+        default:
+            return 0
+        }
     }
 
     /*
