@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class TagLocationViewController: UITableViewController {
 
@@ -15,9 +16,8 @@ class TagLocationViewController: UITableViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    var latitude:String!
-    var longitude:String!
-    var address: String!
+    var location: CLLocationCoordinate2D!
+    var address: String?
     var date: Date!
     
     override func viewDidLoad() {
@@ -35,10 +35,9 @@ class TagLocationViewController: UITableViewController {
     }
     
     private func UpdateLabels() {
-        self.latitudeLabel.text = self.latitude
-        self.longitudeLabel.text = self.longitude
+        self.latitudeLabel.text = String(describing: self.location.latitude)
+        self.longitudeLabel.text = String(describing: self.location.longitude)
         self.addressLabel.text = self.address
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short

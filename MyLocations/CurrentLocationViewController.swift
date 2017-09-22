@@ -45,9 +45,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         case "TagLocation":
             let navController = segue.destination as! UINavigationController
             let controller = navController.topViewController! as! TagLocationViewController
-            controller.latitude = self.latitudeLabel.text!
-            controller.longitude = self.longitudeLabel.text!
-            controller.address = self.address!
+            controller.location = self.location!.coordinate
+            controller.address = self.address
             controller.date = Date()
             segue.perform()
             return
