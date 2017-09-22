@@ -13,6 +13,7 @@
 		7A480E111ED6D43200357C98 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A480E0F1ED6D43200357C98 /* Main.storyboard */; };
 		7A480E131ED6D43200357C98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A480E121ED6D43200357C98 /* Assets.xcassets */; };
 		7A480E161ED6D43200357C98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A480E141ED6D43200357C98 /* LaunchScreen.storyboard */; };
+		7AEB9D391F74EB8B00E76D7E /* TagLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB9D381F74EB8B00E76D7E /* TagLocationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		7A480E121ED6D43200357C98 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A480E151ED6D43200357C98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A480E171ED6D43200357C98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AEB9D381F74EB8B00E76D7E /* TagLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLocationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				7A480E0F1ED6D43200357C98 /* Main.storyboard */,
 				7A480E091ED6D43200357C98 /* AppDelegate.swift */,
 				7A480E0B1ED6D43200357C98 /* CurrentLocationViewController.swift */,
+				7AEB9D381F74EB8B00E76D7E /* TagLocationViewController.swift */,
 				7A480E0D1ED6D43200357C98 /* SecondViewController.swift */,
 				7A480E121ED6D43200357C98 /* Assets.xcassets */,
 				7A480E141ED6D43200357C98 /* LaunchScreen.storyboard */,
@@ -142,6 +145,7 @@
 			files = (
 				7A480E0E1ED6D43200357C98 /* SecondViewController.swift in Sources */,
 				7A480E0A1ED6D43200357C98 /* AppDelegate.swift in Sources */,
+				7AEB9D391F74EB8B00E76D7E /* TagLocationViewController.swift in Sources */,
 				7A480E0C1ED6D43200357C98 /* CurrentLocationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

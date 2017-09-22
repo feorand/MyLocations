@@ -48,6 +48,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         }
     }
     
+    var timerGetLocationPossible: Timer? = nil
+    
     //MARK: - Update interface methods
     
     private func didSetLocation() {
@@ -173,6 +175,9 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
         self.updatingLocation = true
+        timerGetLocationPossible = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { timer in
+            print("Timeout")
+            self.stopLocationManager()})
     }
     
     private func stopLocationManager() {
@@ -180,6 +185,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         locationManager.delegate = nil
         locationManager.stopUpdatingLocation()
         self.updatingLocation = false
+        timerGetLocationPossible?.invalidate()
     }
     
     private func canRequestLocation() -> Bool {
@@ -260,4 +266,3 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         address = getAddress(from: placemark)
     }
 }
-
