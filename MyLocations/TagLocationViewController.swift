@@ -20,6 +20,13 @@ class TagLocationViewController: UITableViewController {
     var address: String?
     var date: Date!
     
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,9 +45,6 @@ class TagLocationViewController: UITableViewController {
         self.latitudeLabel.text = String(describing: self.location.latitude)
         self.longitudeLabel.text = String(describing: self.location.longitude)
         self.addressLabel.text = self.address
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .short
         self.dateLabel.text = dateFormatter.string(from: self.date)
     }
 
