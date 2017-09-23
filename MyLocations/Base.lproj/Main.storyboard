@@ -411,6 +411,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="yT0-OB-OWV" kind="unwind" identifier="categoryPicked" unwindAction="didChooseCategory:" id="xia-rJ-JMV"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -420,6 +423,7 @@
                     </tableView>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pdr-gi-lih" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="yT0-OB-OWV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3206" y="-324"/>
         </scene>

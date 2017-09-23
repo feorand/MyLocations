@@ -11,7 +11,6 @@ import UIKit
 class CategoryPickerViewController: UITableViewController {
     
     var categoryId = 0
-    var delegate: CategoryPickerDelegate? = nil
 
     // MARK: - Table view data source
 
@@ -22,27 +21,15 @@ class CategoryPickerViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "locationCategory", for: indexPath)
         cell.textLabel?.text = LocationCategories.categories[indexPath.row]
-        if categoryId == indexPath.row {
-            UpdateAccessory(ofCell: cell)
-        }
-        
+        cell.accessoryType = categoryId == indexPath.row ? .checkmark : .none
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UpdateAccessory(ofCellWithId: categoryId)
-        UpdateAccessory(ofCellWithId: indexPath.row)
-        delegate?.didChooseCategory(withId: indexPath.row)
-        self.navigationController?.popViewController(animated: true)
-    }
+    // MARK: - Navigation
     
-    private func UpdateAccessory(ofCellWithId id:Int) {
-        let indexPath = IndexPath(row: id, section: 0)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "locationCategory", for: indexPath)
-        UpdateAccessory(ofCell: cell)
-    }
-    
-    private func UpdateAccessory(ofCell cell: UITableViewCell) {
-        cell.accessoryType = cell.accessoryType == .checkmark ? .none : .checkmark
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        self.categoryId = indexPath.row
     }
 }

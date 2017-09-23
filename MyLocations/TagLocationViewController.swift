@@ -43,6 +43,12 @@ class TagLocationViewController: UITableViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func didChooseCategory(_ segue: UIStoryboardSegue) {
+        let controller = segue.source as! CategoryPickerViewController
+        self.categoryId = controller.categoryId
+        UpdateLabels()
+    }
+    
     private func UpdateLabels() {
         self.latitudeLabel.text = String(describing: self.location.latitude)
         self.longitudeLabel.text = String(describing: self.location.longitude)
@@ -90,18 +96,10 @@ class TagLocationViewController: UITableViewController {
         switch id {
         case "pickCategory":
             let controller = segue.destination as! CategoryPickerViewController
-            controller.delegate = self
             controller.categoryId = self.categoryId
         default:
             print("Unknown segue")
             return
         }
-    }
-}
-
-extension TagLocationViewController: CategoryPickerDelegate {
-    func didChooseCategory(withId id: Int) {
-        self.categoryId = id
-        UpdateLabels()
     }
 }

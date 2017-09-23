@@ -16,7 +16,6 @@
 		7AEB9D391F74EB8B00E76D7E /* TagLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB9D381F74EB8B00E76D7E /* TagLocationViewController.swift */; };
 		7AEB9D3B1F76546800E76D7E /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB9D3A1F76546800E76D7E /* CategoryPickerViewController.swift */; };
 		7AEB9D3D1F7654B200E76D7E /* LocationCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB9D3C1F7654B200E76D7E /* LocationCategories.swift */; };
-		7AEB9D3F1F765F8800E76D7E /* CategoryPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB9D3E1F765F8800E76D7E /* CategoryPickerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +30,6 @@
 		7AEB9D381F74EB8B00E76D7E /* TagLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLocationViewController.swift; sourceTree = "<group>"; };
 		7AEB9D3A1F76546800E76D7E /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
 		7AEB9D3C1F7654B200E76D7E /* LocationCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCategories.swift; sourceTree = "<group>"; };
-		7AEB9D3E1F765F8800E76D7E /* CategoryPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +67,6 @@
 				7A480E0B1ED6D43200357C98 /* CurrentLocationViewController.swift */,
 				7AEB9D381F74EB8B00E76D7E /* TagLocationViewController.swift */,
 				7AEB9D3A1F76546800E76D7E /* CategoryPickerViewController.swift */,
-				7AEB9D3E1F765F8800E76D7E /* CategoryPickerDelegate.swift */,
 				7AEB9D3C1F7654B200E76D7E /* LocationCategories.swift */,
 				7A480E0D1ED6D43200357C98 /* SecondViewController.swift */,
 				7A480E121ED6D43200357C98 /* Assets.xcassets */,
@@ -156,7 +153,6 @@
 				7A480E0A1ED6D43200357C98 /* AppDelegate.swift in Sources */,
 				7AEB9D391F74EB8B00E76D7E /* TagLocationViewController.swift in Sources */,
 				7AEB9D3B1F76546800E76D7E /* CategoryPickerViewController.swift in Sources */,
-				7AEB9D3F1F765F8800E76D7E /* CategoryPickerDelegate.swift in Sources */,
 				7AEB9D3D1F7654B200E76D7E /* LocationCategories.swift in Sources */,
 				7A480E0C1ED6D43200357C98 /* CurrentLocationViewController.swift in Sources */,
 			);
