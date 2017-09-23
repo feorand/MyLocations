@@ -15,12 +15,14 @@ class TagLocationViewController: UITableViewController {
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
     
     var location: CLLocationCoordinate2D!
     var address: String?
     var date: Date!
+    var categoryId = 0
     
-    let dateFormatter: DateFormatter = {
+    private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
@@ -46,6 +48,7 @@ class TagLocationViewController: UITableViewController {
         self.longitudeLabel.text = String(describing: self.location.longitude)
         self.addressLabel.text = self.address
         self.dateLabel.text = dateFormatter.string(from: self.date)
+        self.categoryLabel.text = LocationCategories.categories[categoryId]
     }
 
     // MARK: - Table view data source
@@ -72,7 +75,7 @@ class TagLocationViewController: UITableViewController {
         case 2:
             return false
         default:
-            return false
+            return true
         }
     }
 }

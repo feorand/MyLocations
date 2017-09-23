@@ -227,6 +227,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="XgQ-rc-Rq8" kind="show" id="40Z-iM-ta1"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -373,6 +376,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addressLabel" destination="xaS-g4-BeC" id="oms-jx-zir"/>
+                        <outlet property="categoryLabel" destination="5nz-WR-nrg" id="ObP-6P-XlA"/>
                         <outlet property="dateLabel" destination="qeJ-dU-oRy" id="uk1-JN-Kjm"/>
                         <outlet property="latitudeLabel" destination="gEa-xJ-P09" id="73y-tB-Xv0"/>
                         <outlet property="longitudeLabel" destination="FsY-pl-GDL" id="ljy-pV-Fdk"/>
@@ -381,6 +385,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CZV-9i-7AM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2332" y="-321.58920539730138"/>
+        </scene>
+        <!--Category Picker View Controller-->
+        <scene sceneID="wii-4T-ftu">
+            <objects>
+                <tableViewController id="XgQ-rc-Rq8" customClass="CategoryPickerViewController" customModule="MyLocations" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VH1-n3-yyq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="locationCategory" textLabel="oJb-0g-dc2" style="IBUITableViewCellStyleDefault" id="Lel-49-Oj3">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lel-49-Oj3" id="RUD-L0-TFZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oJb-0g-dc2">
+                                            <rect key="frame" x="16" y="0.0" width="344" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="XgQ-rc-Rq8" id="eic-zi-kUT"/>
+                            <outlet property="delegate" destination="XgQ-rc-Rq8" id="Rrk-Dm-VlF"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pdr-gi-lih" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3206" y="-324"/>
         </scene>
     </scenes>
     <resources>
