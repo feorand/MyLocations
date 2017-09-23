@@ -228,7 +228,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="XgQ-rc-Rq8" kind="show" id="40Z-iM-ta1"/>
+                                            <segue destination="XgQ-rc-Rq8" kind="show" identifier="pickCategory" id="40Z-iM-ta1"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>

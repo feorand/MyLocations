@@ -78,4 +78,30 @@ class TagLocationViewController: UITableViewController {
             return true
         }
     }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let id = segue.identifier else {
+            print("Empty segue ID")
+            return
+        }
+        
+        switch id {
+        case "pickCategory":
+            let controller = segue.destination as! CategoryPickerViewController
+            controller.delegate = self
+            controller.categoryId = self.categoryId
+        default:
+            print("Unknown segue")
+            return
+        }
+    }
+}
+
+extension TagLocationViewController: CategoryPickerDelegate {
+    func didChooseCategory(withId id: Int) {
+        self.categoryId = id
+        UpdateLabels()
+    }
 }
