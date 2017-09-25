@@ -32,8 +32,21 @@ class TagLocationViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
+        recognizer.cancelsTouchesInView = true
+        tableView.addGestureRecognizer(recognizer)
+        
         UpdateLabels()
+    }
+    
+    @objc func hideKeyboard(_ recognizer: UITapGestureRecognizer) {
+        let location = recognizer.location(in: tableView)
+        let indexPath = tableView.indexPathForRow(at: location)
+        
+        if let indexPath = indexPath, indexPath.section != 0 || indexPath.row != 0 {
+            descriptionTextView.resignFirstResponder()
+        }
     }
     
     @IBAction func didPressCancel() {
