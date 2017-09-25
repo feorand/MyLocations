@@ -16,6 +16,7 @@ class TagLocationViewController: UITableViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var descriptionTextView: UITextView!
     
     var location: CLLocationCoordinate2D!
     var address: String?
@@ -59,30 +60,18 @@ class TagLocationViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 2
-        case 1:
-            return 1
-        case 2:
-            return 4
-        default:
-            return 0
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            descriptionTextView.becomeFirstResponder()
         }
     }
     
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        switch indexPath.section {
-        case 2:
+        if indexPath.section == 2 {
             return false
-        default:
-            return true
         }
+        
+        return true
     }
     
     // MARK: - Navigation

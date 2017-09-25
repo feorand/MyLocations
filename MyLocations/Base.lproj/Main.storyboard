@@ -194,7 +194,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="((Description))" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="koN-gU-p1e">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="koN-gU-p1e">
                                                     <rect key="frame" x="8" y="0.0" width="359" height="108"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -378,6 +378,7 @@
                         <outlet property="addressLabel" destination="xaS-g4-BeC" id="oms-jx-zir"/>
                         <outlet property="categoryLabel" destination="5nz-WR-nrg" id="ObP-6P-XlA"/>
                         <outlet property="dateLabel" destination="qeJ-dU-oRy" id="uk1-JN-Kjm"/>
+                        <outlet property="descriptionTextView" destination="koN-gU-p1e" id="LYL-bN-N3c"/>
                         <outlet property="latitudeLabel" destination="gEa-xJ-P09" id="73y-tB-Xv0"/>
                         <outlet property="longitudeLabel" destination="FsY-pl-GDL" id="ljy-pV-Fdk"/>
                     </connections>
