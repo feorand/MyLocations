@@ -32,5 +32,11 @@ class SuccessView: UIView {
         let roundedBox = UIBezierPath(roundedRect: boxRect, cornerRadius: 10)
         UIColor(white: 0.3, alpha: 0.6).setFill()
         roundedBox.fill()
+        
+        let image = UIImage(named: "Checkmark")!
+        let imagePoint = CGPoint(x: round((bounds.width - image.size.width) / 2),
+                                 y: round(bounds.height / 2 - image.size.height / 1.5))
+        image.draw(at: imagePoint)
+        
     }
 }
