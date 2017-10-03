@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Dispatch
 
 class TagLocationViewController: UITableViewController {
 
@@ -54,10 +55,12 @@ class TagLocationViewController: UITableViewController {
     }
     
     @IBAction func didPressDone() {
-        //self.dismiss(animated: true, completion: nil)
+        let _ = SuccessView.red(view)
         
-        let redView = SuccessView.red(view)
-        redView.text = "Tagged"
+        let delayTimeInSeconds = 0.8
+        DispatchQueue.main.asyncAfter(deadline: .now() + delayTimeInSeconds) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func didChooseCategory(_ segue: UIStoryboardSegue) {
