@@ -9,7 +9,7 @@
 import UIKit
 
 class SuccessView: UIView {
-    var text = ""
+    var text = "Tagged"
     
     class func red(_ view: UIView) -> SuccessView {
         let redView = SuccessView(frame: view.bounds)
@@ -37,6 +37,13 @@ class SuccessView: UIView {
         let imagePoint = CGPoint(x: center.x - round(image.size.width / 2),
                                  y: center.y - round(image.size.height / 2) - height / 8)
         image.draw(at: imagePoint)
+        
+        let attribs = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16),
+                       NSAttributedStringKey.foregroundColor: UIColor.white]
+        let textSize = text.size(withAttributes: attribs)
+        let textPoint = CGPoint(x: center.x - round(textSize.width / 2),
+                               y: center.y - round(textSize.height / 2) + height / 4)
+        text.draw(at: textPoint, withAttributes: attribs)
         
     }
 }
