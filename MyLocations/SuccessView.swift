@@ -55,9 +55,11 @@ class SuccessView: UIView {
         self.alpha = 0
         transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         
-        UIView.animate(withDuration: 0.3) {
+        let endState = {
             self.alpha = 1
             self.transform = CGAffineTransform.identity
         }
+
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.1, options: [], animations: endState, completion: nil)
     }
 }
