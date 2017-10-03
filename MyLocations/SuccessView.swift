@@ -34,8 +34,8 @@ class SuccessView: UIView {
         roundedBox.fill()
         
         let image = UIImage(named: "Checkmark")!
-        let imagePoint = CGPoint(x: round((bounds.width - image.size.width) / 2),
-                                 y: round(bounds.height / 2 - image.size.height / 1.5))
+        let imagePoint = CGPoint(x: center.x - round(image.size.width / 2),
+                                 y: center.y + round(image.size.height / 2))
         image.draw(at: imagePoint)
         
     }
