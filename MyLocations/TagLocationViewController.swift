@@ -57,10 +57,9 @@ class TagLocationViewController: UITableViewController {
     @IBAction func didPressDone() {
         let _ = SuccessView.red(view)
         
-        let delayTimeInSeconds = 0.8
-        DispatchQueue.main.asyncAfter(deadline: .now() + delayTimeInSeconds) {
-            self.dismiss(animated: true, completion: nil)
-        }
+        let delayTimeInSeconds = 0.7
+        let dismissSelf = { self.dismiss(animated: true, completion: nil) }
+        executeAfter(delayTimeInSeconds, closure: dismissSelf)
     }
     
     @IBAction func didChooseCategory(_ segue: UIStoryboardSegue) {
@@ -109,5 +108,11 @@ class TagLocationViewController: UITableViewController {
             print("Unknown segue")
             return
         }
+    }
+}
+
+extension TagLocationViewController {
+    func executeAfter(_ time: Double, closure: @escaping () -> ()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + time, execute: closure)
     }
 }
