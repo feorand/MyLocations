@@ -24,8 +24,8 @@ class SuccessView: UIView {
         let width: CGFloat = 96
         let height: CGFloat = 96
         
-        let boxRect = CGRect(x: (bounds.width - width) / 2,
-                             y: (bounds.height - height) / 2,
+        let boxRect = CGRect(x: center.x - width / 2,
+                             y: center.y - height / 2,
                              width: width,
                              height: height)
         
@@ -35,7 +35,7 @@ class SuccessView: UIView {
         
         let image = UIImage(named: "Checkmark")!
         let imagePoint = CGPoint(x: center.x - round(image.size.width / 2),
-                                 y: center.y + round(image.size.height / 2))
+                                 y: center.y - round(image.size.height / 2) - height / 8)
         image.draw(at: imagePoint)
         
     }
