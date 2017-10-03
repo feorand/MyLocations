@@ -13,6 +13,7 @@
 		7A480E111ED6D43200357C98 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A480E0F1ED6D43200357C98 /* Main.storyboard */; };
 		7A480E131ED6D43200357C98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A480E121ED6D43200357C98 /* Assets.xcassets */; };
 		7A480E161ED6D43200357C98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A480E141ED6D43200357C98 /* LaunchScreen.storyboard */; };
+		7A5999EA1F8247D2001BA091 /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5999E91F8247D2001BA091 /* SuccessView.swift */; };
 		7AEB9D391F74EB8B00E76D7E /* TagLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB9D381F74EB8B00E76D7E /* TagLocationViewController.swift */; };
 		7AEB9D3B1F76546800E76D7E /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB9D3A1F76546800E76D7E /* CategoryPickerViewController.swift */; };
 		7AEB9D3D1F7654B200E76D7E /* LocationCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB9D3C1F7654B200E76D7E /* LocationCategories.swift */; };
@@ -27,6 +28,7 @@
 		7A480E121ED6D43200357C98 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A480E151ED6D43200357C98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A480E171ED6D43200357C98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A5999E91F8247D2001BA091 /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
 		7AEB9D381F74EB8B00E76D7E /* TagLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLocationViewController.swift; sourceTree = "<group>"; };
 		7AEB9D3A1F76546800E76D7E /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
 		7AEB9D3C1F7654B200E76D7E /* LocationCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCategories.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				7AEB9D381F74EB8B00E76D7E /* TagLocationViewController.swift */,
 				7AEB9D3A1F76546800E76D7E /* CategoryPickerViewController.swift */,
 				7AEB9D3C1F7654B200E76D7E /* LocationCategories.swift */,
+				7A5999E91F8247D2001BA091 /* SuccessView.swift */,
 				7A480E0D1ED6D43200357C98 /* SecondViewController.swift */,
 				7A480E121ED6D43200357C98 /* Assets.xcassets */,
 				7A480E141ED6D43200357C98 /* LaunchScreen.storyboard */,
@@ -155,6 +158,7 @@
 				7AEB9D3B1F76546800E76D7E /* CategoryPickerViewController.swift in Sources */,
 				7AEB9D3D1F7654B200E76D7E /* LocationCategories.swift in Sources */,
 				7A480E0C1ED6D43200357C98 /* CurrentLocationViewController.swift in Sources */,
+				7A5999EA1F8247D2001BA091 /* SuccessView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

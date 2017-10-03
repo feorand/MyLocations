@@ -54,7 +54,10 @@ class TagLocationViewController: UITableViewController {
     }
     
     @IBAction func didPressDone() {
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
+        
+        let redView = SuccessView.red(view)
+        redView.text = "Tagged"
     }
     
     @IBAction func didChooseCategory(_ segue: UIStoryboardSegue) {
