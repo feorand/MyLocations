@@ -14,6 +14,9 @@
 		7A480E131ED6D43200357C98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A480E121ED6D43200357C98 /* Assets.xcassets */; };
 		7A480E161ED6D43200357C98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A480E141ED6D43200357C98 /* LaunchScreen.storyboard */; };
 		7A5999EA1F8247D2001BA091 /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5999E91F8247D2001BA091 /* SuccessView.swift */; };
+		7A5999ED1F848FBB001BA091 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A5999EB1F848FBB001BA091 /* DataModel.xcdatamodeld */; };
+		7A599A021F84C284001BA091 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A599A001F84C284001BA091 /* Location+CoreDataClass.swift */; };
+		7A599A031F84C284001BA091 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A599A011F84C284001BA091 /* Location+CoreDataProperties.swift */; };
 		7AEB9D391F74EB8B00E76D7E /* TagLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB9D381F74EB8B00E76D7E /* TagLocationViewController.swift */; };
 		7AEB9D3B1F76546800E76D7E /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB9D3A1F76546800E76D7E /* CategoryPickerViewController.swift */; };
 		7AEB9D3D1F7654B200E76D7E /* LocationCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB9D3C1F7654B200E76D7E /* LocationCategories.swift */; };
@@ -29,6 +32,9 @@
 		7A480E151ED6D43200357C98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A480E171ED6D43200357C98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A5999E91F8247D2001BA091 /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
+		7A5999EC1F848FBB001BA091 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		7A599A001F84C284001BA091 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataClass.swift"; path = "MyLocations/Location+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7A599A011F84C284001BA091 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataProperties.swift"; path = "MyLocations/Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7AEB9D381F74EB8B00E76D7E /* TagLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLocationViewController.swift; sourceTree = "<group>"; };
 		7AEB9D3A1F76546800E76D7E /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
 		7AEB9D3C1F7654B200E76D7E /* LocationCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCategories.swift; sourceTree = "<group>"; };
@@ -48,6 +54,8 @@
 		7A480DFD1ED6D43200357C98 = {
 			isa = PBXGroup;
 			children = (
+				7A599A001F84C284001BA091 /* Location+CoreDataClass.swift */,
+				7A599A011F84C284001BA091 /* Location+CoreDataProperties.swift */,
 				7A480E081ED6D43200357C98 /* MyLocations */,
 				7A480E071ED6D43200357C98 /* Products */,
 			);
@@ -75,6 +83,7 @@
 				7A480E121ED6D43200357C98 /* Assets.xcassets */,
 				7A480E141ED6D43200357C98 /* LaunchScreen.storyboard */,
 				7A480E171ED6D43200357C98 /* Info.plist */,
+				7A5999EB1F848FBB001BA091 /* DataModel.xcdatamodeld */,
 			);
 			path = MyLocations;
 			sourceTree = "<group>";
@@ -153,10 +162,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A480E0E1ED6D43200357C98 /* SecondViewController.swift in Sources */,
+				7A5999ED1F848FBB001BA091 /* DataModel.xcdatamodeld in Sources */,
 				7A480E0A1ED6D43200357C98 /* AppDelegate.swift in Sources */,
 				7AEB9D391F74EB8B00E76D7E /* TagLocationViewController.swift in Sources */,
+				7A599A031F84C284001BA091 /* Location+CoreDataProperties.swift in Sources */,
 				7AEB9D3B1F76546800E76D7E /* CategoryPickerViewController.swift in Sources */,
 				7AEB9D3D1F7654B200E76D7E /* LocationCategories.swift in Sources */,
+				7A599A021F84C284001BA091 /* Location+CoreDataClass.swift in Sources */,
 				7A480E0C1ED6D43200357C98 /* CurrentLocationViewController.swift in Sources */,
 				7A5999EA1F8247D2001BA091 /* SuccessView.swift in Sources */,
 			);
@@ -339,6 +351,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7A5999EB1F848FBB001BA091 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7A5999EC1F848FBB001BA091 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 7A5999EC1F848FBB001BA091 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7A480DFE1ED6D43200357C98 /* Project object */;
 }
