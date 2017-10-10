@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import CoreData
 
 class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -19,6 +20,8 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet private weak var addressLabel: UILabel!
     @IBOutlet private weak var tagLocationButton: UIButton!
     @IBOutlet private weak var getLocationButton: UIButton!
+    
+    weak var context: NSManagedObjectContext!
     
     //MARK: - Actions
     
