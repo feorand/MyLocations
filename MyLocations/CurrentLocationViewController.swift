@@ -51,6 +51,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             controller.location = self.location!.coordinate
             controller.address = self.address
             controller.date = Date()
+            controller.context = context
             segue.perform()
             return
         default:

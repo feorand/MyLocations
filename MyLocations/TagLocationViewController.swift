@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import Dispatch
+import CoreData
 
 class TagLocationViewController: UITableViewController {
 
@@ -23,6 +24,7 @@ class TagLocationViewController: UITableViewController {
     var address: String?
     var date: Date!
     var categoryId = 0
+    weak var context: NSManagedObjectContext!
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -55,6 +57,21 @@ class TagLocationViewController: UITableViewController {
     }
     
     @IBAction func didPressDone() {
+        let locationForSave = Location(context: context)
+        locationForSave.address = address
+        locationForSave.date = date
+        locationForSave.latitude = location.latitude
+        locationForSave.longitude = location.longitude
+        locationForSave.category = Int16(categoryId)
+        locationForSave.locationDescription = descriptionTextView.text
+        do {
+            try context.save()
+        } catch {
+            //Imitating writing to log
+            print(error.localizedDescription)
+            exit(0)
+        }
+        
         let _ = SuccessView.red(view)
         
         let delayTimeInSeconds = 0.7
