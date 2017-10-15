@@ -67,9 +67,7 @@ class TagLocationViewController: UITableViewController {
         do {
             try context.save()
         } catch {
-            //Imitating writing to log
-            print(error.localizedDescription)
-            exit(0)
+            context.fatalErrorWithNotification(error: error)
         }
         
         let _ = SuccessView.red(view)
