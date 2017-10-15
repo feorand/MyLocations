@@ -67,7 +67,8 @@ class TagLocationViewController: UITableViewController {
         do {
             try context.save()
         } catch {
-            context.fatalErrorWithNotification(error: error)
+            context.raiseNotificationFor(error: error)
+            return
         }
         
         let _ = SuccessView.red(view)

@@ -25,8 +25,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     lazy var context = persistentContainer.viewContext
+    
+    func registerNotificationObserverForCoreDataSavingError() {
+        func findPresentedViewController() -> UIViewController {
+            let rootViewController = self.window!.rootViewController!
+            return rootViewController.presentedViewController ?? rootViewController
+        }
+        
+        let observerHandler: (Notification) -> Void = {_ in
+            let alert = UIAlertController(title: "Error", message: "An error occured. Sorry", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "OK", style: .default) { action in
+                NSException(name: .internalInconsistencyException, reason: "Fatal Core Data exception", userInfo: nil).raise()
+            }
+            
+            alert.addAction(okAction)
+            
+            let controller = findPresentedViewController()
+            controller.present(alert, animated: true, completion: nil)
+        }
+        
+        NotificationCenter.default.addObserver(forName: CoreDataNotification.saveError.value, object: nil, queue: OperationQueue.main, using: observerHandler)
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        registerNotificationObserverForCoreDataSavingError()
         
         let tabController = window!.rootViewController as! UITabBarController
         let currentLocationController = tabController.viewControllers![0] as! CurrentLocationViewController

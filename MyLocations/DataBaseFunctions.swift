@@ -9,10 +9,17 @@
 import Foundation
 import CoreData
 
+enum CoreDataNotification: String {
+    case saveError = "NSManagedObjectContextSaveFatalError"
+    
+    var value: Notification.Name {
+        return Notification.Name(rawValue: self.rawValue)
+    }
+}
+
 extension NSManagedObjectContext {
-    func fatalErrorWithNotification(error:Error) {
-        let notificationName = Notification.Name(rawValue: "NSManagedObjectContextFatalError")
-        print("Fatal error: \(error)")
+    func raiseNotificationFor(error:Error) {
+        let notificationName = CoreDataNotification.saveError.value
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
 }
