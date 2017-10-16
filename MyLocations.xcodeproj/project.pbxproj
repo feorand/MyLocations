@@ -34,8 +34,8 @@
 		7A480E171ED6D43200357C98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A5999E91F8247D2001BA091 /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
 		7A5999EC1F848FBB001BA091 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
-		7A599A001F84C284001BA091 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataClass.swift"; path = "MyLocations/Location+CoreDataClass.swift"; sourceTree = "<group>"; };
-		7A599A011F84C284001BA091 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataProperties.swift"; path = "MyLocations/Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7A599A001F84C284001BA091 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7A599A011F84C284001BA091 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7AE9E35C1F93660F0004FEF9 /* DataBaseFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseFunctions.swift; sourceTree = "<group>"; };
 		7AEB9D381F74EB8B00E76D7E /* TagLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLocationViewController.swift; sourceTree = "<group>"; };
 		7AEB9D3A1F76546800E76D7E /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
@@ -56,8 +56,6 @@
 		7A480DFD1ED6D43200357C98 = {
 			isa = PBXGroup;
 			children = (
-				7A599A001F84C284001BA091 /* Location+CoreDataClass.swift */,
-				7A599A011F84C284001BA091 /* Location+CoreDataProperties.swift */,
 				7A480E081ED6D43200357C98 /* MyLocations */,
 				7A480E071ED6D43200357C98 /* Products */,
 			);
@@ -74,6 +72,7 @@
 		7A480E081ED6D43200357C98 /* MyLocations */ = {
 			isa = PBXGroup;
 			children = (
+				7AB5A5B51F945E8E0036FC00 /* Data Objects */,
 				7A480E0F1ED6D43200357C98 /* Main.storyboard */,
 				7A480E091ED6D43200357C98 /* AppDelegate.swift */,
 				7AE9E35C1F93660F0004FEF9 /* DataBaseFunctions.swift */,
@@ -89,6 +88,15 @@
 				7A5999EB1F848FBB001BA091 /* DataModel.xcdatamodeld */,
 			);
 			path = MyLocations;
+			sourceTree = "<group>";
+		};
+		7AB5A5B51F945E8E0036FC00 /* Data Objects */ = {
+			isa = PBXGroup;
+			children = (
+				7A599A001F84C284001BA091 /* Location+CoreDataClass.swift */,
+				7A599A011F84C284001BA091 /* Location+CoreDataProperties.swift */,
+			);
+			path = "Data Objects";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
