@@ -12,4 +12,9 @@ class LocationCell: UITableViewCell {
 
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+
+    func configure(for location:Location) {
+        descriptionLabel.text = location.locationDescription!.isEmpty ? "(No description)" : location.locationDescription
+        addressLabel.text = location.address
+    }
 }

@@ -20,10 +20,7 @@ class LocationsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell") as! LocationCell
-
-        let index = indexPath.row
-        cell.addressLabel.text = locations[index].address
-        cell.descriptionLabel.text = locations[index].locationDescription
+        cell.configure(for: locations[indexPath.row])
         
         return cell
     }
