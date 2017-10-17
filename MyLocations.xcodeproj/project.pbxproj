@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7A4117341F960DEA0041EF33 /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4117331F960DEA0041EF33 /* LocationsViewController.swift */; };
+		7A4117361F965DD60041EF33 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4117351F965DD60041EF33 /* LocationCell.swift */; };
 		7A480E0A1ED6D43200357C98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A480E091ED6D43200357C98 /* AppDelegate.swift */; };
 		7A480E0C1ED6D43200357C98 /* CurrentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A480E0B1ED6D43200357C98 /* CurrentLocationViewController.swift */; };
 		7A480E111ED6D43200357C98 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A480E0F1ED6D43200357C98 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		7A4117331F960DEA0041EF33 /* LocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
+		7A4117351F965DD60041EF33 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		7A480E061ED6D43200357C98 /* MyLocations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyLocations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A480E091ED6D43200357C98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A480E0B1ED6D43200357C98 /* CurrentLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				7AEB9D381F74EB8B00E76D7E /* TagLocationViewController.swift */,
 				7AEB9D3A1F76546800E76D7E /* CategoryPickerViewController.swift */,
 				7AEB9D3C1F7654B200E76D7E /* LocationCategories.swift */,
+				7A4117351F965DD60041EF33 /* LocationCell.swift */,
 				7A5999E91F8247D2001BA091 /* SuccessView.swift */,
 				7A4117331F960DEA0041EF33 /* LocationsViewController.swift */,
 				7A480E121ED6D43200357C98 /* Assets.xcassets */,
@@ -178,6 +181,7 @@
 				7A599A031F84C284001BA091 /* Location+CoreDataProperties.swift in Sources */,
 				7AE9E35D1F93660F0004FEF9 /* DataBaseFunctions.swift in Sources */,
 				7AEB9D3B1F76546800E76D7E /* CategoryPickerViewController.swift in Sources */,
+				7A4117361F965DD60041EF33 /* LocationCell.swift in Sources */,
 				7AEB9D3D1F7654B200E76D7E /* LocationCategories.swift in Sources */,
 				7A599A021F84C284001BA091 /* Location+CoreDataClass.swift in Sources */,
 				7A480E0C1ED6D43200357C98 /* CurrentLocationViewController.swift in Sources */,
