@@ -37,7 +37,7 @@ class TagLocationViewController: UITableViewController {
         super.viewDidLoad()
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
-        recognizer.cancelsTouchesInView = true
+        recognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(recognizer)
         
         UpdateLabels()
