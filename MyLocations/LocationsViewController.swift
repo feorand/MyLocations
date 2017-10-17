@@ -7,43 +7,43 @@
 //
 
 import UIKit
+import CoreData
 
 class LocationsViewController: UITableViewController {
+
+    weak var context: NSManagedObjectContext!
+    var locations: [Location] = []
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return locations.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell") ?? UITableViewCell()
+
+        let index = indexPath.row
         let descriptionLabel = cell.viewWithTag(100) as! UILabel
-        descriptionLabel.text = "Hello"
+        descriptionLabel.text = locations[index].locationDescription
         let addressLabel = cell.viewWithTag(101) as! UILabel
-        addressLabel.text = "world"
+        addressLabel.text = locations[index].address
         
         return cell
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let fetchRequest = NSFetchRequest<Location>()
+        let entity = Location.entity()
+        fetchRequest.entity = entity
+
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        do {
+            locations = try context.fetch(fetchRequest)
+        } catch {
+            fatalError()
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
