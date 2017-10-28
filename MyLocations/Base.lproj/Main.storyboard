@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -97,10 +97,10 @@
             </objects>
             <point key="canvasLocation" x="750" y="-320.07042253521126"/>
         </scene>
-        <!--Location-->
+        <!--Locations-->
         <scene sceneID="nlv-RZ-VlG">
             <objects>
-                <tableViewController title="Location" id="gOh-AM-FWE" customClass="LocationsViewController" customModule="MyLocations" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Locations" id="gOh-AM-FWE" customClass="LocationsViewController" customModule="MyLocations" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IQQ-k8-hPj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -132,6 +132,7 @@
                                 <connections>
                                     <outlet property="addressLabel" destination="17S-mA-CrH" id="ivX-4m-4I9"/>
                                     <outlet property="descriptionLabel" destination="THC-vG-Ppl" id="I19-RS-C4l"/>
+                                    <segue destination="Qpw-QL-7PN" kind="presentation" identifier="EditLocation" id="QHX-S5-SRJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -456,4 +457,7 @@
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="QHX-S5-SRJ"/>
+    </inferredMetricsTieBreakers>
 </document>

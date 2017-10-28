@@ -20,7 +20,9 @@ class TagLocationViewController: UITableViewController {
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     
-    var location: CLLocationCoordinate2D!
+    var locationToEdit: Location? = nil
+
+    var locationCoords: CLLocationCoordinate2D!
     var address: String?
     var date: Date!
     var categoryId = 0
@@ -42,7 +44,15 @@ class TagLocationViewController: UITableViewController {
         
         UpdateLabels()
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if let location = locationToEdit {
+
+        }
+    }
+
     @objc func hideKeyboard(_ recognizer: UITapGestureRecognizer) {
         let location = recognizer.location(in: tableView)
         let indexPath = tableView.indexPathForRow(at: location)
@@ -60,8 +70,8 @@ class TagLocationViewController: UITableViewController {
         let locationForSave = Location(context: context)
         locationForSave.address = address
         locationForSave.date = date
-        locationForSave.latitude = location.latitude
-        locationForSave.longitude = location.longitude
+        locationForSave.latitude = locationCoords.latitude
+        locationForSave.longitude = locationCoords.longitude
         locationForSave.category = Int16(categoryId)
         locationForSave.locationDescription = descriptionTextView.text
         do {
@@ -85,8 +95,8 @@ class TagLocationViewController: UITableViewController {
     }
     
     private func UpdateLabels() {
-        self.latitudeLabel.text = String(describing: self.location.latitude)
-        self.longitudeLabel.text = String(describing: self.location.longitude)
+        self.latitudeLabel.text = String(describing: self.locationCoords.latitude)
+        self.longitudeLabel.text = String(describing: self.locationCoords.longitude)
         self.addressLabel.text = self.address
         self.dateLabel.text = dateFormatter.string(from: self.date)
         self.categoryLabel.text = LocationCategories.categories[categoryId]

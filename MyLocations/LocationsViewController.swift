@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 class LocationsViewController: UITableViewController {
 
@@ -39,6 +40,24 @@ class LocationsViewController: UITableViewController {
             locations = try context.fetch(fetchRequest)
         } catch {
             fatalError()
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EditLocation" {
+            let navController = segue.destination as! UINavigationController
+            let controller = navController.topViewController! as! TagLocationViewController
+            controller.context = self.context
+
+            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+                let location = locations[indexPath.row]
+                controller.locationToEdit = location
+
+                controller.address = location.address
+                controller.date = location.date
+                controller.categoryId = Int(location.category)
+                controller.locationCoords = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+            }
         }
     }
 }
