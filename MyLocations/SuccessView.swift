@@ -9,10 +9,19 @@
 import UIKit
 
 class SuccessView: UIView {
-    var text = "Tagged"
-    
-    class func red(_ view: UIView) -> SuccessView {
-        let redView = SuccessView(frame: view.bounds)
+    var text = ""
+
+    init(frame: CGRect, text: String) {
+        self.text = text
+        super.init(frame: frame)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    class func red(_ view: UIView, text: String) -> SuccessView {
+        let redView = SuccessView(frame: view.bounds, text: text)
         redView.isOpaque = false
         redView.isUserInteractionEnabled = false
         

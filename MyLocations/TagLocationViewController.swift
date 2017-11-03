@@ -71,13 +71,22 @@ class TagLocationViewController: UITableViewController {
     }
     
     @IBAction func didPressDone() {
-        let locationForSave = Location(context: context)
-        locationForSave.address = address
-        locationForSave.date = date
-        locationForSave.latitude = locationCoords.latitude
-        locationForSave.longitude = locationCoords.longitude
-        locationForSave.category = Int16(categoryId)
-        locationForSave.locationDescription = descriptionTextView.text
+
+        let location:Location
+
+        if let temp = locationToEdit {
+            location = temp
+        } else {
+            location = Location(context: context)
+        }
+
+        location.address = address
+        location.date = date
+        location.latitude = locationCoords.latitude
+        location.longitude = locationCoords.longitude
+        location.category = Int16(categoryId)
+        location.locationDescription = descriptionTextView.text
+
         do {
             try context.save()
         } catch {
@@ -85,7 +94,7 @@ class TagLocationViewController: UITableViewController {
             return
         }
         
-        let _ = SuccessView.red(view)
+        let _ = SuccessView.red(view, text: "Tagged")
         
         let delayTimeInSeconds = 0.7
         let dismissSelf = { self.dismiss(animated: true, completion: nil) }
