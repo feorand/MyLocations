@@ -20,14 +20,13 @@ class SuccessView: UIView {
         super.init(coder: aDecoder)
     }
 
-    class func red(_ view: UIView, text: String) -> SuccessView {
+    class func showSuccess(_ view: UIView, with text: String){
         let redView = SuccessView(frame: view.bounds, text: text)
         redView.isOpaque = false
         redView.isUserInteractionEnabled = false
         
         view.addSubview(redView)
         redView.showAnimated()
-        return redView
     }
     
     override func draw(_ rect: CGRect) {

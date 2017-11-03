@@ -73,11 +73,14 @@ class TagLocationViewController: UITableViewController {
     @IBAction func didPressDone() {
 
         let location:Location
+        let successText: String
 
         if let temp = locationToEdit {
             location = temp
+            successText = "Updated"
         } else {
             location = Location(context: context)
+            successText = "Tagged"
         }
 
         location.address = address
@@ -94,7 +97,7 @@ class TagLocationViewController: UITableViewController {
             return
         }
         
-        let _ = SuccessView.red(view, text: "Tagged")
+        let _ = SuccessView.showSuccess(view, with: successText)
         
         let delayTimeInSeconds = 0.7
         let dismissSelf = { self.dismiss(animated: true, completion: nil) }
