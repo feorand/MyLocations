@@ -37,20 +37,17 @@ class TagLocationViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if let location = locationToEdit {
+            title = "Edit Location"
+            descriptionTextView.text = location.locationDescription
+        }
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
         recognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(recognizer)
         
         UpdateLabels()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if let location = locationToEdit {
-
-        }
     }
 
     @objc func hideKeyboard(_ recognizer: UITapGestureRecognizer) {
