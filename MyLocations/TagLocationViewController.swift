@@ -20,13 +20,25 @@ class TagLocationViewController: UITableViewController {
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     
-    var locationToEdit: Location? = nil
+    var locationToEdit: Location? = nil {
+        didSet {
+            if let location = locationToEdit {
+                title = "Edit Location"
+                locationDescription = location.locationDescription
+                address = location.address
+                date = location.date
+                categoryId = Int(location.category)
+                locationCoords = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+            }
+        }
+    }
 
     var locationCoords: CLLocationCoordinate2D!
     var address: String?
     var date: Date!
     var categoryId = 0
     weak var context: NSManagedObjectContext!
+    var locationDescription: String?
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -37,17 +49,12 @@ class TagLocationViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let location = locationToEdit {
-            title = "Edit Location"
-            descriptionTextView.text = location.locationDescription
-        }
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(_:)))
         recognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(recognizer)
         
-        UpdateLabels()
+        updateLabels()
     }
 
     @objc func hideKeyboard(_ recognizer: UITapGestureRecognizer) {
@@ -88,10 +95,11 @@ class TagLocationViewController: UITableViewController {
     @IBAction func didChooseCategory(_ segue: UIStoryboardSegue) {
         let controller = segue.source as! CategoryPickerViewController
         self.categoryId = controller.categoryId
-        UpdateLabels()
+        updateLabels()
     }
     
-    private func UpdateLabels() {
+    private func updateLabels() {
+        descriptionTextView.text = locationDescription
         self.latitudeLabel.text = String(describing: self.locationCoords.latitude)
         self.longitudeLabel.text = String(describing: self.locationCoords.longitude)
         self.addressLabel.text = self.address

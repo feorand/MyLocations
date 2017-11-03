@@ -52,11 +52,6 @@ class LocationsViewController: UITableViewController {
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
                 let location = locations[indexPath.row]
                 controller.locationToEdit = location
-
-                controller.address = location.address
-                controller.date = location.date
-                controller.categoryId = Int(location.category)
-                controller.locationCoords = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             }
         }
     }
