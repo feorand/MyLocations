@@ -15,6 +15,22 @@ class LocationsViewController: UITableViewController {
     weak var context: NSManagedObjectContext!
     var locations: [Location] = []
 
+    lazy var fetchedResultsController: NSFetchedResultsController<Location> = {
+        let fetchRequest = NSFetchRequest<Location>()
+        fetchRequest.entity = Location.entity()
+
+        let sortDescriptorByDate = NSSortDescriptor(key: "Date", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptorByDate]
+
+        let controller = NSFetchedResultsController<Location>(
+                fetchRequest: fetchRequest,
+                managedObjectContext: self.context,
+                sectionNameKeyPath: nil,
+                cacheName: "Locations")
+
+        return controller
+    }()
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return locations.count
     }
