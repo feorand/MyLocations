@@ -59,6 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let locationsNavigationController = tabController.viewControllers![1] as! UINavigationController
         let locationsController = locationsNavigationController.topViewController as! LocationsViewController
         locationsController.context = self.context
+
+        let _ = locationsController.view
         
         return true
     }
