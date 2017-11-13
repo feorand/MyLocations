@@ -121,4 +121,9 @@ extension LocationsViewController: NSFetchedResultsControllerDelegate {
             print("update section")
         }
     }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("controllerDidChangeContent")
+        tableView.endUpdates()
+    }
 }
