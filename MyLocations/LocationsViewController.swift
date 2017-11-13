@@ -106,4 +106,19 @@ extension LocationsViewController: NSFetchedResultsControllerDelegate {
             }
         }
     }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            print("insert section")
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            print("delete section")
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .move:
+            print("move section")
+        case .update:
+            print("update section")
+        }
+    }
 }
