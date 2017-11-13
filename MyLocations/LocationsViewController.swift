@@ -18,15 +18,16 @@ class LocationsViewController: UITableViewController {
         let fetchRequest = NSFetchRequest<Location>()
         fetchRequest.entity = Location.entity()
 
-        let sortDescriptorByDate = NSSortDescriptor(key: "date", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptorByDate]
+        let sortByCategory = NSSortDescriptor(key: "category", ascending: true)
+        let sortByDate = NSSortDescriptor(key: "date", ascending: true)
+        fetchRequest.sortDescriptors = [sortByCategory, sortByDate]
 
         fetchRequest.fetchBatchSize = 20
 
         let controller = NSFetchedResultsController<Location>(
                 fetchRequest: fetchRequest,
                 managedObjectContext: self.context,
-                sectionNameKeyPath: nil,
+                sectionNameKeyPath: "category",
                 cacheName: "Locations")
 
         controller.delegate = self
