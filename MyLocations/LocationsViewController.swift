@@ -43,7 +43,7 @@ class LocationsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell") as! LocationCell
-        cell.configure(for: locations[indexPath.row])
+        cell.configure(for: fetchedResultsController.object(at: indexPath))
         
         return cell
     }
