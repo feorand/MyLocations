@@ -36,7 +36,9 @@ class LocationsViewController: UITableViewController {
     }()
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return locations.count
+        let sectionInfo = fetchedResultsController.sections![section]
+        let count = sectionInfo.numberOfObjects
+        return count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
