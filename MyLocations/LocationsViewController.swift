@@ -22,11 +22,15 @@ class LocationsViewController: UITableViewController {
         let sortDescriptorByDate = NSSortDescriptor(key: "Date", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptorByDate]
 
+        fetchRequest.fetchBatchSize = 20
+
         let controller = NSFetchedResultsController<Location>(
                 fetchRequest: fetchRequest,
                 managedObjectContext: self.context,
                 sectionNameKeyPath: nil,
                 cacheName: "Locations")
+
+        controller.delegate = self
 
         return controller
     }()
@@ -45,15 +49,12 @@ class LocationsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let fetchRequest = NSFetchRequest<Location>()
-        let entity = Location.entity()
-        fetchRequest.entity = entity
+        performFetch()
+    }
 
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-
+    private func performFetch() {
         do {
-            locations = try context.fetch(fetchRequest)
+            try fetchedResultsController.performFetch()
         } catch {
             fatalError()
         }
@@ -71,4 +72,12 @@ class LocationsViewController: UITableViewController {
             }
         }
     }
+
+    deinit {
+        fetchedResultsController.delegate = nil
+    }
+}
+
+extension LocationsViewController: NSFetchedResultsControllerDelegate {
+
 }
