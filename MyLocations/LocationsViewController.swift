@@ -13,7 +13,6 @@ import CoreLocation
 class LocationsViewController: UITableViewController {
 
     weak var context: NSManagedObjectContext!
-    var locations: [Location] = []
 
     lazy var fetchedResultsController: NSFetchedResultsController<Location> = {
         let fetchRequest = NSFetchRequest<Location>()
@@ -69,7 +68,7 @@ class LocationsViewController: UITableViewController {
             controller.context = self.context
 
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
-                let location = locations[indexPath.row]
+                let location = fetchedResultsController.object(at: indexPath)
                 controller.locationToEdit = location
             }
         }

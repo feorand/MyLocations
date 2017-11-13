@@ -24,11 +24,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     weak var context: NSManagedObjectContext!
     
     //MARK: - Actions
-    
-    @IBAction private func tagLocationButtonPressed() {
         
-    }
-    
     @IBAction private func getLocationButtonPressed() {
         
         if self.updatingLocation {
@@ -52,7 +48,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             controller.address = self.address
             controller.date = Date()
             controller.context = context
-            segue.perform()
             return
         default:
             return
