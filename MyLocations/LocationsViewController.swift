@@ -61,6 +61,18 @@ class LocationsViewController: UITableViewController {
         }
     }
 
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        let number = fetchedResultsController.sections!.count
+        return number
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let sectionInfo = fetchedResultsController.sections![section]
+        let titleIndex = Int(sectionInfo.name)!
+        let title = LocationCategories.categories[titleIndex]
+        return title
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

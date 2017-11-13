@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import Dispatch
 import CoreData
+import Foundation
 
 class TagLocationViewController: UITableViewController {
 
