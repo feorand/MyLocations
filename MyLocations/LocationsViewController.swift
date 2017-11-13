@@ -19,7 +19,7 @@ class LocationsViewController: UITableViewController {
         let fetchRequest = NSFetchRequest<Location>()
         fetchRequest.entity = Location.entity()
 
-        let sortDescriptorByDate = NSSortDescriptor(key: "Date", ascending: true)
+        let sortDescriptorByDate = NSSortDescriptor(key: "date", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptorByDate]
 
         fetchRequest.fetchBatchSize = 20
@@ -81,5 +81,29 @@ class LocationsViewController: UITableViewController {
 }
 
 extension LocationsViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("controllerWIllChangeContent")
+        tableView.beginUpdates()
+    }
 
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            print("insert")
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            print("delete")
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .move:
+            print("move")
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .update:
+            print("update")
+            if let cell = tableView.cellForRow(at: indexPath!) as? LocationCell {
+                let updatedLocation = fetchedResultsController.object(at: indexPath!)
+                cell.configure(for: updatedLocation)
+            }
+        }
+    }
 }
