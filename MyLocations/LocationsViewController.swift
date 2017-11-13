@@ -47,6 +47,19 @@ class LocationsViewController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let location = fetchedResultsController.object(at: indexPath)
+            context.delete(location)
+
+            do {
+                try context.save()
+            } catch {
+                fatalError()
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
