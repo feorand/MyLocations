@@ -64,6 +64,7 @@ class LocationsViewController: UITableViewController {
         super.viewDidLoad()
 
         performFetch()
+        navigationItem.rightBarButtonItem = editButtonItem
     }
 
     private func performFetch() {
